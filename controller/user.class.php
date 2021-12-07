@@ -5,6 +5,7 @@
             if (isset($_POST['name']) && isset($_POST['pass'])){
                 //on lance une fonction de la classe SQL
                 $this->insertValues($_POST['name'],$_POST['pass']);
+                header("Location:index.php");
             }
         }
         

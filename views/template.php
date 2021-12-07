@@ -15,13 +15,13 @@
         <?php 
             // On choisis quoi afficher 
             if(isset($_GET['action'])&& !empty($_GET) && $_GET['action'] === 'newUser'):
-                require 'views/register.phtml';
+                require 'views/register.php';
                 echo $register;
             elseif(!empty($_GET) && isset($_GET['login']) || isset($_GET['clear'])): 
-                require 'views/home.phtml';
+                require 'views/home.php';
                 echo $home;
             else:
-                require 'views/connection.phtml';
+                require 'views/connection.php';
                 echo $connection; 
             endif; ?>
     </main>

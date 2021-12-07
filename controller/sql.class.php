@@ -37,17 +37,21 @@ class sqlRequest extends database{
                 WHERE user='$user' AND pass='$pass'";
         $looker=$db->prepare($sql);
         $dataLogin=$looker->execute();
-        
-        if ($dataLogin === true ) {
+        $data=$looker->fetch(PDO::FETCH_ASSOC);
+        //vérification de la présence des données dans la base de données    
+        if (!empty($data['user']) && !empty($data['pass'])) {
             session_start();
             $_SESSION['login'] = $user;
             header("Location:index.php?login=".$user);
         } 
+        else {
+            echo 'unknown user';
+        }
     }
 
     public function deleteValue($user) {
         $db=$this->connexion();//connexion via database.php
-        $sql='DELETE FROM users WHERE user = '. $user;
+        $sql="DELETE FROM users WHERE user= '$user'";
         $query= $db->prepare($sql);
         $query->execute();
     }

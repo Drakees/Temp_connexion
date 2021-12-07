@@ -11,7 +11,7 @@ require 'controller/user.class.php';
 $user = new Utilisateur();
 
 //views
-require 'views/template.phtml';
+require 'views/template.php';
 
 
 
