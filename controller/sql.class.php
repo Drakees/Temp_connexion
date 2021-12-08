@@ -42,11 +42,34 @@ class sqlRequest extends database{
         if (!empty($data['user']) && !empty($data['pass'])) {
             session_start();
             $_SESSION['login'] = $user;
+            $_SESSION['userId']=$data['id'];
             header("Location:index.php?login=".$user);
         } 
         else {
             echo 'unknown user';
         }
+    }
+
+    public function getPass($user){
+        $db=$this->connexion();//connexion via database.php
+        $sql ="SELECT pass FROM users
+                WHERE user='$user'";
+        $getKey=$db->prepare($sql);
+        $dataKey=$getKey->execute();
+        $key=$getKey->fetch(PDO::FETCH_ASSOC);
+        return $key['pass'];
+        
+    }
+
+    public function updateValues($userID,$newName,$newPass) {
+        $db=$this->connexion();//connexion via database.php
+        $sql = "UPDATE users
+                SET user='$newName',pass='$newPass'
+                WHERE id='$userID'";
+        $updater=$db->prepare($sql);
+        $dataUpdate=$updater->execute();
+        $_SESSION['login'] = $newName;
+        header("Location:index.php?login=".$_SESSION['login']);
     }
 
     public function deleteValue($user) {

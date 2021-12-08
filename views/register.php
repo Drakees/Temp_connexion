@@ -24,7 +24,6 @@
                         header("Location:index.php?action=newUser");
                     }
                 }
-                
             }      
             catch(PDOException $e){
                 // Gestions d'erreurs
